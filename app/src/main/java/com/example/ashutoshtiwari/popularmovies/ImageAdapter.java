@@ -1,10 +1,12 @@
 package com.example.ashutoshtiwari.popularmovies;
 
-import android.app.Activity;
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -14,22 +16,24 @@ import java.util.ArrayList;
 
 class ImageAdapter extends BaseAdapter {
 
-    private Activity activity;
-    private ArrayList<Integer> images;
+    private Context context;
+    private ArrayList<String> imagePath;
+    private String baseUrl = "http://image.tmdb.org/t/p/w185/";
 
-    ImageAdapter(Activity activity, ArrayList<Integer> images) {
-        this.activity = activity;
-        this.images = images;
+
+    ImageAdapter(Context context, ArrayList<String> imagePath) {
+        this.context = context;
+        this.imagePath = imagePath;
     }
 
     @Override
     public int getCount() {
-        return images.size();
+        return imagePath.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return images.get(position);
+        return imagePath.get(position);
     }
 
     @Override
@@ -40,16 +44,14 @@ class ImageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
-
-        ImageView imageView;
+        ImageView imageView = (ImageView)convertView;
         if (convertView == null) {
-            imageView = new ImageView(activity);
-            imageView.setPadding(0, 0, 0, 0);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        } else {
-            imageView = (ImageView) convertView;
+            imageView = new ImageView(context);
+            imageView.setAdjustViewBounds(true);
+
         }
-        imageView.setImageResource(images.get(position));
+        String url = (String) getItem(position);
+        Picasso.with(context).load(baseUrl + url).into(imageView);
         return imageView;
     }
 }

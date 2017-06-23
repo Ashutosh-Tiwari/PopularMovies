@@ -1,5 +1,8 @@
 package com.example.ashutoshtiwari.popularmovies;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -9,7 +12,7 @@ import java.util.List;
  * Created by Ashutosh.tiwari on 22/06/17.
  */
 
-public class TheMovieDB {
+public class TheMovieDB implements Parcelable {
 
     @SerializedName("vote_count")
     @Expose
@@ -53,6 +56,34 @@ public class TheMovieDB {
     @SerializedName("release_date")
     @Expose
     private String releaseDate;
+
+    protected TheMovieDB(Parcel in) {
+        voteCount = in.readInt();
+        id = in.readInt();
+        video = in.readByte() != 0;
+        voteAverage = in.readDouble();
+        title = in.readString();
+        popularity = in.readDouble();
+        posterPath = in.readString();
+        originalLanguage = in.readString();
+        originalTitle = in.readString();
+        backdropPath = in.readString();
+        adult = in.readByte() != 0;
+        overview = in.readString();
+        releaseDate = in.readString();
+    }
+
+    public static final Creator<TheMovieDB> CREATOR = new Creator<TheMovieDB>() {
+        @Override
+        public TheMovieDB createFromParcel(Parcel in) {
+            return new TheMovieDB(in);
+        }
+
+        @Override
+        public TheMovieDB[] newArray(int size) {
+            return new TheMovieDB[size];
+        }
+    };
 
     public int getVoteCount() {
         return voteCount;
@@ -184,5 +215,27 @@ public class TheMovieDB {
                 ", overview='" + overview + '\'' +
                 ", releaseDate='" + releaseDate + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(voteCount);
+        dest.writeInt(id);
+        dest.writeByte((byte) (video ? 1 : 0));
+        dest.writeDouble(voteAverage);
+        dest.writeString(title);
+        dest.writeDouble(popularity);
+        dest.writeString(posterPath);
+        dest.writeString(originalLanguage);
+        dest.writeString(originalTitle);
+        dest.writeString(backdropPath);
+        dest.writeByte((byte) (adult ? 1 : 0));
+        dest.writeString(overview);
+        dest.writeString(releaseDate);
     }
 }

@@ -58,29 +58,70 @@
                 android:id="@+id/textview_release_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Year" />
+                android:text="2015"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/grey_600" />
 
             <TextView
                 android:id="@+id/textview_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Duration" />
+                android:layout_marginTop="6dp"
+                android:text="120min"
+                android:textSize="20sp"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/textview_user_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Rating" />
+                android:layout_marginTop="6dp"
+                android:text="8.1/10"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
 
             <Button
                 android:id="@+id/button_mark_favorite"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:background="@color/CustomAccent"
+                android:text="Mark as favorite"
                 android:textAllCaps="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:text="Mark as favorite" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textview_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
+            android:text="description"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/grey_600" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Trailers"
+            android:textSize="16sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </ScrollView>
     </LinearLayout>
 </LinearLayout>

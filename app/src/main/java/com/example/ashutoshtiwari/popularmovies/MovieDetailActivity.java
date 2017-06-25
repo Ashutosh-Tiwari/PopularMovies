@@ -11,6 +11,7 @@ import com.squareup.picasso.Picasso;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
+    private static final String MAX_RATING = "10";
     TheMovieDB theMovieDB;
     private ImageView imageViewMoviePoster;
     private TextView textViewTitle;
@@ -39,7 +40,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         textViewTitle.setText(theMovieDB.getTitle());
         imagePath = theMovieDB.getPosterPath();
         textViewReleaseYear.setText(releaseDate[0]);
-        textViewUserRating.setText(String.valueOf(theMovieDB.getVoteAverage()));
+        textViewUserRating.setText(String.valueOf(theMovieDB.getVoteAverage()) + "/" + MAX_RATING);
 
         Picasso.with(context).load(baseUrl + imagePath).into(imageViewMoviePoster);
     }

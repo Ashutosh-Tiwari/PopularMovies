@@ -14,6 +14,9 @@ public class SettingsActivity extends Activity {
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
 
-        getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
+        getFragmentManager()
+                .beginTransaction()
+                //.replace(android.R.id.content, new SettingsFragment())
+                .commit();
     }
 }

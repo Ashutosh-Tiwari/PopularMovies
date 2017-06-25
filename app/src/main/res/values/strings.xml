@@ -6,4 +6,5 @@
     <string name="action_sort_by_top_rated_label">Sort by top rated</string>
     <string name="action_sort_by_popular">sort_by_top</string>
     <string name="action_sort_by_top_rated">sort_pop</string>
+    <string name="pref_list_title">Sort</string>
 </resources>

@@ -63,7 +63,7 @@ public class DiscoveryActivity extends AppCompatActivity {
                 .build();
 
         TMDClient tmdClient = retrofit.create(TMDClient.class);
-        Call<MoviesData> call = tmdClient.getMovies("ReplaceWithKey");
+        Call<MoviesData> call = tmdClient.getMovies("");
         call.enqueue(new Callback<MoviesData>() {
             @Override
             public void onResponse(@NonNull Call<MoviesData> call, @NonNull Response<MoviesData> response) {

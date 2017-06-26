@@ -1,36 +1,50 @@
 package com.example.ashutoshtiwari.popularmovies;
 
 import android.os.Bundle;
-import android.support.v7.preference.ListPreference;
-import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceFragmentCompat;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.PreferenceFragment;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by Ashutosh.tiwari on 23/06/17.
  */
 
-public class SettingsFragment extends PreferenceFragmentCompat {
+public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
 
-    ListPreference listPreference;
-
+    Preference preference;
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        setPreferencesFromResource(R.xml.preferences, rootKey);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        addPreferencesFromResource(R.xml.preferences);
+        preference.setOnPreferenceChangeListener(this);
+        //bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_sort_key)));
+    }
+
+    private void bindPreferenceSummaryToValue(Preference preference) {
+
+     /*   onPreferenceChange(preference,
+                PreferenceManager
+                        .getDefaultSharedPreferences(preference.getContext())
+                        .getString(preference.getKey(), ""));*/
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        listPreference = (ListPreference) getPreferenceManager().findPreference("sort");
-        listPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                return false;
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        String stringValue = newValue.toString();
+
+        if (preference instanceof ListPreference) {
+            ListPreference listPreference = (ListPreference) preference;
+            int prefIndex = listPreference.findIndexOfValue(stringValue);
+
+            if (prefIndex >= 0) {
+                listPreference.setSummary(listPreference.getEntries()[prefIndex]);
             }
-        });
-        //return inflater.inflate(R.layout.fragment_settings, container, false);
-        return null;
+        } else
+            preference.setSummary(stringValue);
+        getActivity().setResult(RESULT_OK);
+
+        return true;
     }
 }

@@ -1,22 +1,30 @@
 package com.example.ashutoshtiwari.popularmovies;
 
-import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * Created by Ashutosh.tiwari on 23/06/17.
  */
 
-public class SettingsActivity extends Activity {
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+public class SettingsActivity extends AppCompatActivity {
 
-        getFragmentManager()
-                .beginTransaction()
-                //.replace(android.R.id.content, new SettingsFragment())
-                .commit();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_settings);
+
+        Fragment fragment = new SettingsFragment();
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(android.R.id.content, fragment, "settings_fragment");
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

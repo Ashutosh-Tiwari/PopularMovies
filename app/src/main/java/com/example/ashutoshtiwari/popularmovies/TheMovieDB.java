@@ -238,4 +238,9 @@ public class TheMovieDB implements Parcelable {
         dest.writeString(overview);
         dest.writeString(releaseDate);
     }
+
+    /*@Override
+    public int compare(TheMovieDB o1, TheMovieDB o2) {
+        return Double.compare(o1.getPopularity(), o2.getPopularity());
+    }*/
 }

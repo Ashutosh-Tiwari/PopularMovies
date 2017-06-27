@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -13,21 +14,19 @@ import static android.app.Activity.RESULT_OK;
 
 public class SettingsFragment extends PreferenceFragment implements Preference.OnPreferenceChangeListener {
 
-    Preference preference;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
-        preference.setOnPreferenceChangeListener(this);
-        //bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_sort_key)));
+        bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_sort_key)));
     }
 
     private void bindPreferenceSummaryToValue(Preference preference) {
-
-     /*   onPreferenceChange(preference,
+        preference.setOnPreferenceChangeListener(this);
+        onPreferenceChange(preference,
                 PreferenceManager
                         .getDefaultSharedPreferences(preference.getContext())
-                        .getString(preference.getKey(), ""));*/
+                        .getString(preference.getKey(), ""));
     }
 
     @Override
@@ -44,7 +43,6 @@ public class SettingsFragment extends PreferenceFragment implements Preference.O
         } else
             preference.setSummary(stringValue);
         getActivity().setResult(RESULT_OK);
-
         return true;
     }
 }

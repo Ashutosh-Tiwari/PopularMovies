@@ -12,5 +12,5 @@ import retrofit2.http.Query;
 
 public interface TMDClient {
     @GET("3/discover/movie")
-    Call<MoviesData> getMovies(@Query("api_key") String key);
+    Call<MoviesData> getMovies(@Query("api_key") String key, @Query("page") int page);
 }

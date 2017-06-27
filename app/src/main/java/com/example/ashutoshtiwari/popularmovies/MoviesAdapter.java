@@ -14,44 +14,51 @@ import java.util.ArrayList;
  * Created by Ashutosh.tiwari on 21/06/17.
  */
 
-class ImageAdapter extends BaseAdapter {
+class MoviesAdapter extends BaseAdapter {
 
     private Context context;
-    private ArrayList<String> imagePath;
     private String baseUrl = "http://image.tmdb.org/t/p/w185/";
+    ArrayList<TheMovieDB> movies;
 
 
-    ImageAdapter(Context context, ArrayList<String> imagePath) {
+    MoviesAdapter() {
+    }
+
+    MoviesAdapter(Context context, ArrayList<TheMovieDB> movies) {
         this.context = context;
-        this.imagePath = imagePath;
+        this.movies = movies;
     }
 
     @Override
     public int getCount() {
-        return imagePath.size();
+        return movies.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return imagePath.get(position);
+        return movies.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return movies.get(position).getId();
     }
 
 
     @Override
     public View getView(int position, View convertView, ViewGroup viewGroup) {
-        ImageView imageView = (ImageView)convertView;
+        ImageView imageView = (ImageView) convertView;
         if (convertView == null) {
             imageView = new ImageView(context);
             imageView.setAdjustViewBounds(true);
-
         }
-        String url = (String) getItem(position);
+        String url = movies.get(position).getPosterPath();
         Picasso.with(context).load(baseUrl + url).into(imageView);
         return imageView;
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
     }
 }

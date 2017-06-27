@@ -17,6 +17,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private TextView textViewTitle;
     private TextView textViewReleaseYear;
     private TextView textViewUserRating;
+    private TextView textViewDescription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         textViewReleaseYear = (TextView) findViewById(R.id.textview_release_year);
         textViewUserRating = (TextView) findViewById(R.id.textview_user_rating);
         imageViewMoviePoster = (ImageView) findViewById(R.id.imageview_movie_poster);
+        textViewDescription = (TextView) findViewById(R.id.textview_description);
 
         updateUI();
     }
@@ -47,6 +49,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         textViewTitle.setText(theMovieDB.getTitle());
         textViewReleaseYear.setText(releaseDate[0]);
         textViewUserRating.setText(String.valueOf(theMovieDB.getVoteAverage()) + "/" + MAX_RATING);
+        textViewDescription.setText(theMovieDB.getOverview());
 
         imagePath = theMovieDB.getPosterPath();
         Picasso.with(context).load(baseUrl + imagePath).into(imageViewMoviePoster);
